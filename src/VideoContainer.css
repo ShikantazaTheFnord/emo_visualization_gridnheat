@@ -1,0 +1,9 @@
+.VideoContainer {
+    width: 25%;
+    min-width: 300px;
+    max-width: 300px;
+    border: 1px solid red;
+    border-radius: 5px;
+    margin: 2px;
+    height: 400px;
+}

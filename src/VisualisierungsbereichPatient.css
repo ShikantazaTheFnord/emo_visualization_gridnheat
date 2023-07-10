@@ -1,0 +1,8 @@
+.VisualisierungsbereichPatient{
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 10px;
+    width: auto;
+    min-height: 300px;
+    display: flex;
+}
