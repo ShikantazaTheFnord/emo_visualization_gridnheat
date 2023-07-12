@@ -1,14 +1,11 @@
 .ControllsContainer {
     border: 1px solid blue;
     border-radius: 5px;
-    display: flex;
+    min-height: 300px;
     flex-direction: column;
     justify-content: space-between;
-    width: 5%;
-    height: 400px;
+    display: flex;
     margin: 2px;
-    min-width: 50px;
-    max-width: 50px;
 }
 
 .ControllsButton {
