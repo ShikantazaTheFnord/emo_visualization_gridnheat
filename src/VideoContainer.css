@@ -1,5 +1,5 @@
 .VideoContainer {
-    border: 1px solid red;
+    border: 2px solid orangered;
     border-radius: 5px;
     height: inherit;
 }
