@@ -4,81 +4,59 @@ import './HeatJS.css'
 
 export function HeatJS(props) {
 
-    const emoMap = new Map()
-    emoMap.set('happy',0)
-    emoMap.set('anger',1)
-    emoMap.set('contempt',2)
-    emoMap.set('disgust',3)
-    emoMap.set('fear',4)
-    emoMap.set('neutral',5)
-    emoMap.set('sad',6)
-    emoMap.set('surprised',7)
+    const [locextdata, setExtdata] = useState(props.extdata)
 
-    var extdata = [
-        {x: 350, y: 190, value: -1}, // happy
-        {x: 90, y: 50, value: -1}, //anger
-        {x: 50, y: 80, value: -1}, //contempt
-        {x: 20, y: 120, value: -1}, //disgust
-        {x: 170, y: 15, value: -1}, //fear
-        {x: 200, y: 200, value: -1}, //neutral
-        {x: 20, y: 250, value: -1}, //sad
-        {x: 240, y: 40, value: -1} //surprised
-    ]
 
-    var heatmap;
+    useEffect(() => {
 
-    useEffect(()=>{
-
-        heatmap = h337.create({
+        var heatmap = h337.create({
             container: document.querySelector('.heatmap')
         });
 
+
         var nuConfig = {
-            radius: 20,
-            maxOpacity: 5,
-            minOpacity: 0,
-            blur: .75
+            radius: 15,
+            maxOpacity: 0.5,
+            minOpacity:0,
+            blur: 0.75,
+            gradient: {
+                // enter n keys between 0 and 1 here
+                // for gradient color customization
+                /*'.05': 'white',
+                '.2': 'green',
+                '.4': 'darkgreen',
+                '.6': 'yellow',
+                '.65': 'orange',
+                '.8': 'red',
+                '.85': 'darkmagenta'*/
+                '.05': 'white',
+                '.2': 'green',
+                '.3': 'yellow',
+                '.6': 'red'
+            }
         }
 
         heatmap.configure(nuConfig);
 
 
         heatmap.setData({
-            max: 15,
-            data: extdata
+            max:4,
+            min: 0,
+            data: locextdata
         });
+
+        function logger() {
+            console.log(locextdata)
+        }
+
+        logger()
 
     })
-
-
-    function showEmo() {
-        console.log(props)
-    }
-
-    function incrementHappy() {
-        extdata[0].value += 1
-        heatmap.setData({
-            max: 15,
-            data: extdata
-        });
-    }
-
-    function incrementSomething() {
-        extdata[emoMap.get(props.emotion)].value += 1
-        console.log(emoMap.get(props.emotion))
-        heatmap.setData({
-            max: 15,
-            data: extdata
-        });
-    }
-
 
     return (
         <>
             <div className="heatmap" id="cc">
             </div>
-            <button onClick={() => incrementSomething()}>increment something</button>
-            <button onClick={() => showEmo()}>show</button>
         </>
 
     )

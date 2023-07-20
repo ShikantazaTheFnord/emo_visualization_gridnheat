@@ -1,7 +1,7 @@
 import './ControllsContainer.css';
 
 
-export function ControllsContainer({cVAV,cHeatV,cBE,showRandom}) {
+export function ControllsContainer({cVAV,cHeatV,cBE}) {
 
     return (
         <div className="ControllsContainer">
@@ -18,7 +18,7 @@ export function ControllsContainer({cVAV,cHeatV,cBE,showRandom}) {
                 </label>
                 <input type="checkbox" name="chartCheckbox" onChange={cHeatV}/>
             </div>
-            <button className="ControllsButton" onClick={showRandom}>{"\u2BC0"}</button>
+            <button className="ControllsButton">{"\u2BC0"}</button>
         </div>
     );
 }

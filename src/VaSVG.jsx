@@ -1,10 +1,4 @@
-import {useState} from "react";
-
 export function VaSVG(props) {
-
-    const [indicatorPosX, setIndicatorPosX] = useState(200)
-    const [indicatorPosY, setIndicatorPosY] = useState(200)
-
 
     const emoToCoordinatesMap = new Map();
     emoToCoordinatesMap.set("happy", [350, 190])
@@ -17,10 +11,8 @@ export function VaSVG(props) {
     emoToCoordinatesMap.set("surprised", [240, 40])
 
 
-    function changeIndicatorPosition(pe) {
-        setIndicatorPosX(pe[0])
-        setIndicatorPosY(pe[1])
-    }
+    const indicatorPosX = emoToCoordinatesMap.get(props.emotion)[0]
+    const indicatorPosY = emoToCoordinatesMap.get(props.emotion)[1]
 
     return (
         <>
@@ -40,7 +32,6 @@ export function VaSVG(props) {
                         fill="red"
                         fillOpacity="0.1"/>
             </svg>
-            <button onClick={() => changeIndicatorPosition(emoToCoordinatesMap.get(props.emotion))}>c</button>
         </>
     )
 }

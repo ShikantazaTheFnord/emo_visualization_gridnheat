@@ -14,6 +14,17 @@ export function VisualisierungsbereichPatient() {
     const [vaVisibility, setVaVisibility] = useState(false);
     const [heatVisibility, setHeatVisibility] = useState(false);
     const [biggestEmotion, setBiggestEmotion] = useState("neutral");
+    const [extdata, setExtdata] = useState([
+        {x: 350, y: 190, value: -1}, // happy
+        {x: 90, y: 50, value: -1}, //anger
+        {x: 50, y: 80, value: -1}, //contempt
+        {x: 20, y: 120, value: -1}, //disgust
+        {x: 170, y: 15, value: -1}, //fear
+        {x: 200, y: 200, value: -1}, //neutral
+        {x: 20, y: 250, value: -1}, //sad
+        {x: 240, y: 40, value: -1} //surprised
+    ])
+
 
     const layout = [
         {i: "vid", x: 0, y: 0, w: 3, h: 1},
@@ -23,14 +34,38 @@ export function VisualisierungsbereichPatient() {
     ];
 
 
+    /*Anfang aus heatjs*/
+    const emoMap = new Map()
+    emoMap.set('happy', 0)
+    emoMap.set('anger', 1)
+    emoMap.set('contempt', 2)
+    emoMap.set('disgust', 3)
+    emoMap.set('fear', 4)
+    emoMap.set('neutral', 5)
+    emoMap.set('sad', 6)
+    emoMap.set('surprised', 7)
+
+
+    const getEmoIndex = () => emoMap.get(biggestEmotion);
+
+    function incrementExtdataValue() {
+
+        let locExtdata = extdata;
+        locExtdata[getEmoIndex()].value += 1
+        setExtdata(locExtdata)
+    }
+    //Ende aus heatjs
+
+
     function randomEmotion() {
         let emos = ["sad", "disgust", "contempt", "anger", "fear", "surprised", "happy"]
         let z = Math.floor(Math.random() * 7)
+
         return emos[z]
     }
 
     function changeBiggestEmotion(be) {
-        console.log("in pvb......" + be)
+        incrementExtdataValue()
         setBiggestEmotion(be)
     }
 
@@ -61,7 +96,6 @@ export function VisualisierungsbereichPatient() {
                     cBE={() => changeBiggestEmotion(randomEmotion())}
                     cVAV={() => changeVaVisibility()}
                     cHeatV={() => changeHeatVisibility()}
-                    showRandom={()=>randomEmotion()}
                 />
             </div>
             <div key="va" hidden={!vaVisibility}>
@@ -71,7 +105,7 @@ export function VisualisierungsbereichPatient() {
             </div>
             <div key="heat" hidden={!heatVisibility}>
                 <div className="ChartContainer">
-                    <HeatJS emotion={biggestEmotion}/>
+                    <HeatJS extdata={extdata}/>
                 </div>
             </div>
         </GridLayout>
