@@ -7,22 +7,23 @@ import "/node_modules/react-resizable/css/styles.css";
 import "./ChartContainer.css";
 import {VaSVG} from "./VaSVG";
 import {HeatJS} from "./HeatJS";
+import Webcam from "react-webcam";
 
 
-export function VisualisierungsbereichPatient() {
+export function PatientsVisualizationArea() {
 
     const [vaVisibility, setVaVisibility] = useState(false);
     const [heatVisibility, setHeatVisibility] = useState(false);
-    const [biggestEmotion, setBiggestEmotion] = useState("neutral");
+    const [biggestEmotion, setBiggestEmotion] = useState("happy");
     const [extdata, setExtdata] = useState([
-        {x: 350, y: 190, value: -1}, // happy
-        {x: 90, y: 50, value: -1}, //anger
-        {x: 50, y: 80, value: -1}, //contempt
-        {x: 20, y: 120, value: -1}, //disgust
-        {x: 170, y: 15, value: -1}, //fear
-        {x: 200, y: 200, value: -1}, //neutral
-        {x: 20, y: 250, value: -1}, //sad
-        {x: 240, y: 40, value: -1} //surprised
+        {x: 350, y: 190, value: 0}, // happy
+        {x: 90, y: 50, value: 0}, //anger
+        {x: 50, y: 80, value: 0}, //contempt
+        {x: 20, y: 120, value: 0}, //disgust
+        {x: 170, y: 15, value: 0}, //fear
+        {x: 200, y: 200, value: 0}, //neutral
+        {x: 20, y: 250, value: 0}, //sad
+        {x: 240, y: 40, value: 0} //surprised
     ])
 
 
@@ -88,7 +89,8 @@ export function VisualisierungsbereichPatient() {
             width={1700}
         >
             <div key="vid">
-                <VideoContainer/>
+                <Webcam height={800} width={900}/>
+                {/*<VideoContainer/>*/}
             </div>
 
             <div key="ctrl">

@@ -15,11 +15,17 @@ export function VaSVG(props) {
     const indicatorPosY = emoToCoordinatesMap.get(props.emotion)[1]
 
     return (
-        <>
             <svg width="400" height="400">
-                <circle cx="200" cy="200" r="200" stroke="black" strokeWidth="1" fill="white"/>
-                <line x1="200" y1="0" x2="200" y2="400" style={{stroke: 'black', strokeWidth: 1}}/>
-                <line x1="0" y1="200" x2="400" y2="200" style={{stroke: 'black', strokeWidth: 1}}/>
+                <circle cx="200"
+                        cy="200"
+                        r="200"
+                        stroke="black"
+                        strokeWidth="1"
+                        fill="white"/>
+                <line x1="200" y1="0" x2="200" y2="400"
+                      style={{stroke: 'black', strokeWidth: 1}}/>
+                <line x1="0" y1="200" x2="400" y2="200"
+                      style={{stroke: 'black', strokeWidth: 1}}/>
                 <text x="350" y="190">happy</text>
                 <text x="90" y="50">anger</text>
                 <text x="50" y="80">contempt</text>
@@ -28,10 +34,13 @@ export function VaSVG(props) {
                 <text x="200" y="200">neutral</text>
                 <text x="20" y="250">sad</text>
                 <text x="240" y="40">surprised</text>
-                <circle id="indicator" cx={indicatorPosX} cy={indicatorPosY} r="10" stroke="red" strokeWidth="1"
+                <circle cx={indicatorPosX}
+                        cy={indicatorPosY}
+                        r="10"
+                        stroke="red"
+                        strokeWidth="1"
                         fill="red"
                         fillOpacity="0.1"/>
             </svg>
-        </>
     )
 }

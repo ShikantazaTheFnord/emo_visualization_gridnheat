@@ -1,11 +1,11 @@
 
 import './App.css';
-import {VisualisierungsbereichPatient} from "./VisualisierungsbereichPatient";
+import {PatientsVisualizationArea} from "./PatientsVisualizationArea";
 
 function App() {
     return (
         <div className="App">
-            <VisualisierungsbereichPatient/>
+            <PatientsVisualizationArea/>
         </div>
     );
 }
