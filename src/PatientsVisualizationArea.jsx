@@ -30,10 +30,10 @@ export function PatientsVisualizationArea() {
 
 
     const layout = [
-        {i: "vid", x: 0, y: 0, w: 3, h: 1},
-        {i: "ctrl", x: 3, y: 0, w: 1, h: 1},
-        {i: "va", x: 4, y: 0, w: 4, h: 1, isResizable: false},
-        {i: "heat", x: 8, y: 0, w: 4, h: 1, isResizable: false}
+        {i: "vid", x: 0, y: 0, w: 6, h: 1},
+        {i: "ctrl", x: 6, y: 0, w: 1, h: 1},
+        {i: "va", x: 7, y: 0, w: 4, h: 1, isResizable: false},
+        {i: "heat", x: 11, y: 0, w: 4, h: 1, isResizable: false}
     ];
 
 
@@ -110,7 +110,7 @@ export function PatientsVisualizationArea() {
             width={1700}
         >
             <div key="vid">
-                <Webcam height={800} width={900}/>
+                <Webcam height={400} width={500}/>
                 {/*<VideoContainer/>*/}
             </div>
 
