@@ -45,6 +45,9 @@ export function HeatJS(props) {
             data: locextdata
         });
 
+        console.log("console heatjs:")
+        console.log(locextdata)
+
     })
 
 

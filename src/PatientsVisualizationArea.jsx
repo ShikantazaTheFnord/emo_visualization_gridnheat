@@ -14,7 +14,7 @@ export function PatientsVisualizationArea() {
 
     const [vaVisibility, setVaVisibility] = useState(false);
     const [heatVisibility, setHeatVisibility] = useState(false);
-    const [biggestEmotion, setBiggestEmotion] = useState("happy");
+    const [biggestEmotion, setBiggestEmotion] = useState("neutral");
     const [extdata, setExtdata] = useState([
         {x: 350, y: 190, value: -1}, // happy
         {x: 90, y: 50, value: -1}, //anger
@@ -27,6 +27,8 @@ export function PatientsVisualizationArea() {
     ])
 
     const [emoSeriesIndex, setEmoSeriesIndex] = useState(0)
+    const [lastFive, setLastFive] = useState(["", "", "", "", ""])
+    const [indexForFive, setIndexForFive] = useState(0)
 
 
     const layout = [
@@ -38,6 +40,8 @@ export function PatientsVisualizationArea() {
 
 
     /*Anfang aus heatjs*/
+
+
     const emoMap = new Map()
     emoMap.set('happy', 0)
     emoMap.set('anger', 1)
@@ -48,21 +52,11 @@ export function PatientsVisualizationArea() {
     emoMap.set('sad', 6)
     emoMap.set('surprised', 7)
 
+
     const emoSeries = [
-        "sad", "sad", "sad", "sad",
-        "disgust", "contempt", "anger", "anger",
-        "anger", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "sad", "sad", "sad", "sad", "sad",
+        "disgust", "contempt", "anger", "fear", "neutral", "happy", "happy", "happy", "happy", "happy",
+        "happy", "happy", "happy", "happy", "happy", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral"
     ]
 
     function mockEmotion() {
@@ -83,11 +77,46 @@ export function PatientsVisualizationArea() {
         locExtdata[getEmoIndex()].value += 1
         setExtdata(locExtdata)
     }
+
     //Ende aus heatjs
+
+    function chooseLastFive() {
+        let locLastFive = lastFive
+        if (indexForFive <= 4) {
+            locLastFive[indexForFive] = biggestEmotion
+            setLastFive(locLastFive)
+            let locIndexForFive = indexForFive + 1
+            setIndexForFive(locIndexForFive)
+        } else {
+            setIndexForFive(0)
+        }
+    }
+
+    function lastFiveSurvival() {
+        let led = extdata
+        let lastFiveNumber = []
+
+        for (let i = 0; i < lastFive.length; i++) {
+            lastFiveNumber[i] = emoMap.get(lastFive[i])
+        }
+
+        for (let i = 0; i < led.length; i++) {
+            if (!lastFiveNumber.includes(i)) {
+                led[i].value = -1
+            }
+        }
+        setExtdata(led)
+        console.log(lastFiveNumber)
+        console.log(lastFive)
+        console.log(led)
+        console.log(extdata)
+    }
 
 
     function changeBiggestEmotion(be) {
         incrementExtdataValue()
+        chooseLastFive()
+        lastFiveSurvival()
         setBiggestEmotion(be)
     }
 
