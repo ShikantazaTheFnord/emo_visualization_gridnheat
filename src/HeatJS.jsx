@@ -47,17 +47,6 @@ export function HeatJS(props) {
 
     })
 
-
-    /*
-    * aus dem useEffect:
-    *         function logger() {
-            console.log(locextdata)
-        }
-
-        logger()
-    *
-    * */
-
     return (
         <div className="heatmap">
         </div>

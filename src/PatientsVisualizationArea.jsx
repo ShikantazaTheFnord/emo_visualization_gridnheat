@@ -52,18 +52,8 @@ export function PatientsVisualizationArea() {
         "sad", "sad", "sad", "sad",
         "disgust", "contempt", "anger", "anger",
         "anger", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-    ]
+        "happy","happy","happy","happy","happy","happy","happy","happy",
+        ]
 
     function mockEmotion() {
         let outp
