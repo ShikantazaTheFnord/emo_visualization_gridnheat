@@ -16,15 +16,17 @@ export function PatientsVisualizationArea() {
     const [heatVisibility, setHeatVisibility] = useState(false);
     const [biggestEmotion, setBiggestEmotion] = useState("happy");
     const [extdata, setExtdata] = useState([
-        {x: 350, y: 190, value: 0}, // happy
-        {x: 90, y: 50, value: 0}, //anger
-        {x: 50, y: 80, value: 0}, //contempt
-        {x: 20, y: 120, value: 0}, //disgust
-        {x: 170, y: 15, value: 0}, //fear
-        {x: 200, y: 200, value: 0}, //neutral
-        {x: 20, y: 250, value: 0}, //sad
-        {x: 240, y: 40, value: 0} //surprised
+        {x: 350, y: 190, value: -1}, // happy
+        {x: 90, y: 50, value: -1}, //anger
+        {x: 50, y: 80, value: -1}, //contempt
+        {x: 20, y: 120, value: -1}, //disgust
+        {x: 170, y: 15, value: -1}, //fear
+        {x: 200, y: 200, value: -1}, //neutral
+        {x: 20, y: 250, value: -1}, //sad
+        {x: 240, y: 40, value: -1} //surprised
     ])
+
+    const [emoSeriesIndex, setEmoSeriesIndex] = useState(0)
 
 
     const layout = [
@@ -46,6 +48,32 @@ export function PatientsVisualizationArea() {
     emoMap.set('sad', 6)
     emoMap.set('surprised', 7)
 
+    const emoSeries = [
+        "sad", "sad", "sad", "sad",
+        "disgust", "contempt", "anger", "anger",
+        "anger", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+        "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
+    ]
+
+    function mockEmotion() {
+        let outp
+        (emoSeriesIndex < emoSeries.length) ? outp = emoSeries[emoSeriesIndex] : outp = emoSeries[0]
+        let newMockIndex
+        (emoSeriesIndex < emoSeries.length) ? newMockIndex = emoSeriesIndex + 1 : newMockIndex = 0
+        setEmoSeriesIndex(newMockIndex)
+        return outp
+    }
+
 
     const getEmoIndex = () => emoMap.get(biggestEmotion);
 
@@ -57,13 +85,6 @@ export function PatientsVisualizationArea() {
     }
     //Ende aus heatjs
 
-
-    function randomEmotion() {
-        let emos = ["sad", "disgust", "contempt", "anger", "fear", "surprised", "happy"]
-        let z = Math.floor(Math.random() * 7)
-
-        return emos[z]
-    }
 
     function changeBiggestEmotion(be) {
         incrementExtdataValue()
@@ -95,7 +116,7 @@ export function PatientsVisualizationArea() {
 
             <div key="ctrl">
                 <ControllsContainer
-                    cBE={() => changeBiggestEmotion(randomEmotion())}
+                    cBE={() => changeBiggestEmotion(mockEmotion())}
                     cVAV={() => changeVaVisibility()}
                     cHeatV={() => changeHeatVisibility()}
                 />
