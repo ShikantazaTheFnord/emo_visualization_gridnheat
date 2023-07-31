@@ -5,14 +5,13 @@ import './HeatJS.css'
 export function HeatJS(props) {
 
     // eslint-disable-next-line no-unused-vars
-    const [locextdata, __] = useState(props.extdata)
-
+    const locextdata = props.extdata
 
     useEffect(() => {
-
         var heatmap = h337.create({
             container: document.querySelector('.heatmap')
         });
+
 
         var nuConfig = {
             radius: 15,
@@ -45,18 +44,13 @@ export function HeatJS(props) {
             data: locextdata
         });
 
-    })
-
-
-    /*
-    * aus dem useEffect:
-    *         function logger() {
-            console.log(locextdata)
+        return () =>{
+            let el = document.querySelector('.heatmap-canvas')
+            el.remove()
         }
 
-        logger()
-    *
-    * */
+    });
+
 
     return (
         <div className="heatmap">
