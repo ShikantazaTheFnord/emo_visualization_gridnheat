@@ -1,11 +1,11 @@
 import './ControllsContainer.css';
 
 
-export function ControllsContainer({cVAV,cHeatV,cBE}) {
+export function ControllsContainer({cVAV, cHeatV, visStartInterval, visStopInterval}) {
 
     return (
         <div className="ControllsContainer">
-            <button className="ControllsButton" onClick={cBE}>{"\u2BC8"}</button>
+            <button className="ControllsButton" onClick={() => visStartInterval()}>{"\u2BC8"}</button>
             <div className="ChartCheckbox">
                 <label>
                     VA
@@ -18,7 +18,7 @@ export function ControllsContainer({cVAV,cHeatV,cBE}) {
                 </label>
                 <input type="checkbox" name="chartCheckbox" onChange={cHeatV}/>
             </div>
-            <button className="ControllsButton">{"\u2BC0"}</button>
+            <button className="ControllsButton" onClick={() => visStopInterval()}>{"\u2BC0"}</button>
         </div>
     );
 }

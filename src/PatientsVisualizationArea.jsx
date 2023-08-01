@@ -1,6 +1,6 @@
-import {VideoContainer} from "./VideoContainer";
+//import {VideoContainer} from "./VideoContainer";
 import {ControllsContainer} from "./ControllsContainer";
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import GridLayout from "react-grid-layout";
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
@@ -35,11 +35,7 @@ export function PatientsVisualizationArea() {
         {name: 'sad', rank: 3},
         {name: 'surprised', rank: 3}
     ])
-
-
     const [emoSeriesIndex, setEmoSeriesIndex] = useState(0)
-
-
     const layout = [
         {i: "vid", x: 0, y: 0, w: 6, h: 1},
         {i: "ctrl", x: 6, y: 0, w: 1, h: 1},
@@ -63,7 +59,6 @@ export function PatientsVisualizationArea() {
     emoMap.set('sad', 6)
     emoMap.set('surprised', 7)
 
-
     const getEmoIndex = () => emoMap.get(biggestEmotion);
 
 
@@ -79,10 +74,8 @@ export function PatientsVisualizationArea() {
 
     //Ende aus heatjs **********************************
 
-
     //mock-data
     const emoSeries = [
-        "sad", "sad", "sad", "sad",
         "sad", "sad", "sad", "sad",
         "sad", "sad", "sad", "sad",
         "disgust", "contempt", "anger", "anger",
@@ -90,7 +83,11 @@ export function PatientsVisualizationArea() {
         "disgust", "contempt", "anger", "anger",
         "disgust", "contempt", "anger", "anger",
         "neutral", "neutral", "neutral", "neutral", "neutral", "neutral", "neutral",
-        "happy", "happy", "happy", "happy", "happy"
+        "happy", "happy", "happy", "happy", "happy",
+        "surprised", "surprised", "surprised", "surprised",
+        "surprised", "surprised", "surprised", "surprised",
+        "surprised", "surprised", "surprised", "surprised",
+        "surprised", "surprised", "surprised", "surprised"
     ]
 
     function decrementExtdataValue() {
@@ -99,9 +96,7 @@ export function PatientsVisualizationArea() {
         let locExtdata = extdata
 
         for (let i = 0; i < extdata.length; i++) {
-            console.log("i...." + i)
             if (i !== speci) {
-
                 switch (emoRank[i].rank) {
                     case 3:
                         locEmoRank[i].rank = locEmoRank[i].rank - 1
@@ -122,6 +117,8 @@ export function PatientsVisualizationArea() {
         }
     }
 
+    //liefert die emotion für set biggest emotion aus emoSeries
+    //kann später, wenn echte daten reinkommen, weg
     function mockEmotion() {
         let outp
         (emoSeriesIndex < emoSeries.length) ? outp = emoSeries[emoSeriesIndex] : outp = emoSeries[0]
@@ -129,12 +126,6 @@ export function PatientsVisualizationArea() {
         (emoSeriesIndex < emoSeries.length) ? newMockIndex = emoSeriesIndex + 1 : newMockIndex = 0
         setEmoSeriesIndex(newMockIndex)
         return outp
-    }
-
-    function changeBiggestEmotion(be) {
-        incrementExtdataValue()
-        decrementExtdataValue()
-        setBiggestEmotion(be)
     }
 
     function changeVaVisibility() {
@@ -146,6 +137,33 @@ export function PatientsVisualizationArea() {
         let newValue = (!heatVisibility);
         setHeatVisibility(newValue)
     }
+
+    function visualize() {
+        incrementExtdataValue()
+        decrementExtdataValue()
+        setBiggestEmotion(mockEmotion())
+    }
+
+    const [intervalBool, setIntervalBool] = useState(false)
+    const visInterv = useRef(null);
+
+
+    function handleIntervalStateChangeStart() {
+        setIntervalBool(true)
+    }
+
+    function handleIntervalStateChangeStop() {
+        setIntervalBool(false)
+    }
+
+    useEffect(() => {
+        if(intervalBool){
+            visInterv.current = setInterval(() => {
+                visualize()
+            }, 250);
+            return () => clearInterval(visInterv.current);
+        }
+    });
 
 
     return (
@@ -163,9 +181,10 @@ export function PatientsVisualizationArea() {
 
             <div key="ctrl">
                 <ControllsContainer
-                    cBE={() => changeBiggestEmotion(mockEmotion())}
+                    visStartInterval={() => handleIntervalStateChangeStart()}
                     cVAV={() => changeVaVisibility()}
                     cHeatV={() => changeHeatVisibility()}
+                    visStopInterval={() => handleIntervalStateChangeStop()}
                 />
             </div>
             <div key="va" hidden={!vaVisibility}>

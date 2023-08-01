@@ -31,6 +31,7 @@ export function HeatJS(props) {
                 '.05': 'white',
                 '.2': 'green',
                 '.3': 'yellow',
+                '.4': 'orange',
                 '.6': 'red',
                 '.85': 'darkmagenta'
             }
@@ -39,12 +40,13 @@ export function HeatJS(props) {
         heatmap.configure(nuConfig);
 
         heatmap.setData({
-            max: 5,
+            max: 8,
             min: 0,
             data: locextdata
         });
 
-        return () =>{
+
+        return () => {
             let el = document.querySelector('.heatmap-canvas')
             el.remove()
         }
