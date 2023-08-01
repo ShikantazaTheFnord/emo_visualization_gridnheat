@@ -176,7 +176,7 @@ export function PatientsVisualizationArea() {
         >
 
             <div key="vid">
-                <Webcam height={400} width={500}/>
+                <Webcam height={100+'%'}/>
             </div>
 
             <div key="ctrl">
