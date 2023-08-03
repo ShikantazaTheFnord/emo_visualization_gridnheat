@@ -62,6 +62,10 @@ export function PatientsVisualizationArea() {
     const getEmoIndex = () => emoMap.get(biggestEmotion);
 
 
+    /*
+    * Wenn eine Emotion aktiv wird, bekommt sie den höchsten Rang (3)
+    * und wird intensiver eingefärbt
+    * */
     function incrementExtdataValue() {
         let locExtdata = extdata
         let locEmoRank = emoRank
@@ -90,6 +94,10 @@ export function PatientsVisualizationArea() {
         "surprised", "surprised", "surprised", "surprised"
     ]
 
+    /*
+    * jede inaktive Runde verringert den Rang der Emotion
+    * bei Rang 1 beginnt das Entfärben
+    * */
     function decrementExtdataValue() {
         let speci = getEmoIndex()
         let locEmoRank = emoRank
@@ -141,6 +149,10 @@ export function PatientsVisualizationArea() {
     function visualize() {
         incrementExtdataValue()
         decrementExtdataValue()
+        /* wenn echte daten vorliegen: statt mit mockEmotion mit echten Daten versorgen;
+        erwartet einen string, daher eine "schnittstelle", die daten auf ein string mappt
+        zwischenschalten
+        */
         setBiggestEmotion(mockEmotion())
     }
 

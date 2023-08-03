@@ -1,10 +1,9 @@
 import h337 from "heatmap.js";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import './HeatJS.css'
 
 export function HeatJS(props) {
 
-    // eslint-disable-next-line no-unused-vars
     const locextdata = props.extdata
 
     useEffect(() => {
@@ -27,8 +26,8 @@ export function HeatJS(props) {
                 '.6': 'yellow',
                 '.65': 'orange',
                 '.8': 'red',
-                '.85': 'darkmagenta'*/
-                '.05': 'white',
+                '.85': 'darkmagenta'
+                '.05': 'white',*/
                 '.2': 'green',
                 '.3': 'yellow',
                 '.4': 'orange',
